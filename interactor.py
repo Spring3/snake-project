@@ -1,7 +1,8 @@
-# manual play
-import random, time
+import random
+import time
 
 from pyglet.window.key import MOTION_UP, MOTION_DOWN, MOTION_LEFT, MOTION_RIGHT
+
 from env.snake_env import SnakeEnv
 
 
@@ -39,12 +40,13 @@ def interact():
     while not done:
         time.sleep(delay_time)
         obs, reward, done, info = env.step(action)
+        print(f'snake length: {len(info)}')
         env.render(mode='human')
         if reward:
             r += reward
             # Speeding up snake after eating food
-            delay_time -= 1/6 * delay_time
-
+            delay_time -= 1 / 6 * delay_time
+    env.close()
     return r
 
 
